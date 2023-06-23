@@ -4,12 +4,24 @@
   ViewData["Title"] = "Register";
 }
 
-<div class="card card-body">
-  <input class="form-control mb-1" asp-for="Email"/>
-  <input class="form-control mb-1" asp-for="Username"/>
-  <input class="form-control mb-1" asp-for="Password"/>
-  <input class="form-control mb-1" asp-for="ConfirmPassword"/>
-  
-  <hr/>
-  <button class="btn btn-success">Register</button>
-</div>
+<form method="post">
+  <div class="card card-body col-md-4">
+    <div class="text-danger mb-2" asp-validation-summary="ModelOnly"></div>
+    
+    <input class="form-control mb-1" asp-for="Email" placeholder="Email"/>
+    <span class="text-danger" asp-validation-for="Email"></span>
+    
+    <input class="form-control mb-1" asp-for="Username" placeholder="Username"/>
+    <span class="text-danger" asp-validation-for="Username"></span>
+    
+    <input class="form-control mb-1" asp-for="Password" placeholder="Password"/>
+    <span class="text-danger" asp-validation-for="Password"></span>
+    
+    <input class="form-control mb-1" asp-for="ConfirmPassword" placeholder="Confirm password"/>
+    <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+    
+    <hr/>
+    
+    <button class="btn btn-success">Register</button>
+  </div>
+</form>

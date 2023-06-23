@@ -10,6 +10,8 @@ public class MapperProfile : Profile
   public MapperProfile()
   {
     CreateMap<RegisterUserVm, IdentityUser>();
-    CreateMap<RegisterUserVm, User>();
+    CreateMap<IdentityUser, User>();
+
+    CreateMap<CreateReportVm, Report>();
   }
 }

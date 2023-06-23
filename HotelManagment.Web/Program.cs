@@ -9,9 +9,10 @@ builder.Services.AddMvc();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 builder.Services.ConfigureDbContext(builder.Configuration);
+builder.Services.ConfigureDefaultIdentity();
 
-builder.Services.AddUserRepository();
-builder.Services.AddUserService();
+builder.Services.ConfigureRepositories();
+builder.Services.ConfigureServices();
 
 var app = builder.Build();
 

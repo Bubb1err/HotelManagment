@@ -5,10 +5,17 @@
 }
 
 <form method="post">
-  <div class="card card-body">
-    <input class="form-control" asp-for="Username" placeholder="Username" />
-    <input class="form-control" asp-for="Password" placeholder="Password" />
+  <div class="card card-body col-md-4">
+    <div class="text-danger mb-2" asp-validation-summary="ModelOnly"></div>
+    
+    <input class="form-control mb-1" asp-for="Username" placeholder="Username"/>
+    <span class="text-danger" asp-validation-for="Username"></span>
+    
+    <input class="form-control mb-1" asp-for="Password" placeholder="Password"/>
+    <span class="text-danger" asp-validation-for="Password"></span>
+    
     <hr/>
+    
     <button class="btn btn-success">Login</button>
   </div>
 </form>
