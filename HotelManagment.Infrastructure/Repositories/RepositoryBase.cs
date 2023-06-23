@@ -18,12 +18,12 @@ public abstract class RepositoryBase<T> : IRepository<T>
   // GET
   public virtual IQueryable<T> Get()
   {
-    return _dbContext.Set<T>();
+    return _dbContext.Set<T>().AsNoTracking();
   }
 
   public virtual IQueryable<T> Get(Expression<Func<T, bool>> expression)
   {
-    return _dbContext.Set<T>().Where(expression);
+    return _dbContext.Set<T>().Where(expression).AsNoTracking();
   }
 
   public virtual async Task<T?> TryFindAsync(Expression<Func<T, bool>> expression)
@@ -32,23 +32,23 @@ public abstract class RepositoryBase<T> : IRepository<T>
   }
 
   // CREATE
-  public virtual void Create(T entity)
+  public virtual async Task CreateAsync(T entity)
   {
-    _dbContext.Set<T>().Entry(entity).State = EntityState.Added;
-    _dbContext.SaveChanges();
+    await _dbContext.Set<T>().AddAsync(entity);
+    await _dbContext.SaveChangesAsync();
   }
 
   // UPDATE
-  public virtual void Update(T entity)
+  public virtual async Task UpdateAsync(T entity)
   {
-    _dbContext.Set<T>().Entry(entity).State = EntityState.Modified;
-    _dbContext.SaveChanges();
+    _dbContext.Set<T>().Update(entity);
+    await _dbContext.SaveChangesAsync();
   }
 
   // DELETE
-  public virtual void Delete(T entity)
+  public virtual async Task DeleteAsync(T entity)
   {
-    _dbContext.Set<T>().Entry(entity).State = EntityState.Deleted;
-    _dbContext.SaveChanges();
+    _dbContext.Set<T>().Remove(entity);
+    await _dbContext.SaveChangesAsync();
   }
 }

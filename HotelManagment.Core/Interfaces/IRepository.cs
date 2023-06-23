@@ -11,11 +11,11 @@ public interface IRepository<T>
   Task<T?> TryFindAsync(Expression<Func<T, bool>> expression);
 
   // CREATE
-  void Create(T entity);
+  Task CreateAsync(T entity);
 
   // UPDATE
-  void Update(T entity);
+  Task UpdateAsync(T entity);
 
   // DELETE
-  void Delete(T entity);
+  Task DeleteAsync(T entity);
 }

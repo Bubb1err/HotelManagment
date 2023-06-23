@@ -50,21 +50,21 @@ public class UserService : IUserService
 
   public Result Create(User user)
   {
-    _userRepository.Create(user);
+    _userRepository.CreateAsync(user);
 
     return Result.Succeeded();
   }
 
   public Result Update(User user)
   {
-    _userRepository.Update(user);
+    _userRepository.UpdateAsync(user);
     
     return Result.Succeeded();
   }
 
   public Result Delete(User user)
   {
-    _userRepository.Delete(user);
+    _userRepository.DeleteAsync(user);
 
     return Result.Succeeded();
   }

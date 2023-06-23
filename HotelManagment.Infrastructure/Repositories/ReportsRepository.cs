@@ -9,10 +9,5 @@ namespace HotelManagment.Infrastructure.Repositories
     public ReportsRepository(HotelDbContext dbContext) : base(dbContext)
     {
     }
-
-    public void Update(Report report)
-    {
-     _db.Update(report);
-    }
   }
 }
