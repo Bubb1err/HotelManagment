@@ -1,5 +1,5 @@
 ﻿using HotelManagment.Core.Entities;
-using HotelManagment.Shared;
+using HotelManagment.Core;
 
 namespace HotelManagment.Core.Interfaces;
 

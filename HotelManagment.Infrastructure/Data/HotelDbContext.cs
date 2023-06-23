@@ -7,6 +7,7 @@ namespace HotelManagment.Infrastructure.Data;
 public class HotelDbContext : IdentityDbContext
 {
   public DbSet<User> Accounts { get; set; }
+  public DbSet<Report> Reports { get; set; }
 
   public HotelDbContext(DbContextOptions<HotelDbContext> options) : base(options) { }
 }

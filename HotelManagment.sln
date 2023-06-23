@@ -5,11 +5,11 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagment.Web", "HotelManagment.Web\HotelManagment.Web.csproj", "{7FA4433E-A87B-4714-A0F3-CEA7BC2780BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelManagment.Core", "HotelManagment.Core\HotelManagment.Core.csproj", "{E866F22B-0713-4117-BD5C-5837C4B1A81D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagment.Core", "HotelManagment.Core\HotelManagment.Core.csproj", "{E866F22B-0713-4117-BD5C-5837C4B1A81D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelManagment.Infrastructure", "HotelManagment.Infrastructure\HotelManagment.Infrastructure.csproj", "{4F4D8043-EE07-4F21-840A-F742123B5A3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagment.Infrastructure", "HotelManagment.Infrastructure\HotelManagment.Infrastructure.csproj", "{4F4D8043-EE07-4F21-840A-F742123B5A3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelManagment.Shared", "HotelManagment.Shared\HotelManagment.Shared.csproj", "{B90DD3D2-73D1-4CC0-8608-ED32F50CCEE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagment.Shared", "HotelManagment.Shared\HotelManagment.Shared.csproj", "{B90DD3D2-73D1-4CC0-8608-ED32F50CCEE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

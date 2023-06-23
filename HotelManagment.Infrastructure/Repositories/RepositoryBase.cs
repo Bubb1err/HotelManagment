@@ -1,5 +1,5 @@
 ﻿using HotelManagment.Infrastructure.Data;
-using HotelManagment.Shared;
+using HotelManagment.Core;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,44 +8,71 @@ namespace HotelManagment.Infrastructure.Repositories;
 public abstract class RepositoryBase<T> : IRepository<T>
   where T : class
 {
-  protected readonly HotelDbContext _dbContext;
+  protected readonly HotelDbContext _db;
+  protected DbSet<T> dbSet;
 
-  public RepositoryBase(HotelDbContext dbContext)
+  public RepositoryBase(HotelDbContext db)
   {
-    _dbContext = dbContext;
+    _db = db;
+    dbSet = _db.Set<T>();
+  }
+  public virtual async Task AddAsync(T entity)
+  {
+    await dbSet.AddAsync(entity);
+  }
+  public virtual IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
+  {
+    IQueryable<T> query = dbSet;
+    if (filter != null)
+    {
+      query = query.Where(filter);
+    }
+    if (includeProperties != null)
+    {
+      foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+      {
+        query = query.Include(includeProp);
+      }
+    }
+    return query;
   }
 
-  // GET
-  public virtual IQueryable<T> Get()
+  public virtual T GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = true)
   {
-    return _dbContext.Set<T>();
+    if (tracked)
+    {
+      IQueryable<T> query = dbSet;
+      return Filtering(query, filter, includeProperties);
+    }
+    else
+    {
+      IQueryable<T> query = dbSet.AsNoTracking();
+      return Filtering(query, filter, includeProperties);
+    }
+
   }
 
-  public virtual IQueryable<T> Get(Expression<Func<T, bool>> expression)
+  public virtual void Remove(T entity)
   {
-    return _dbContext.Set<T>().Where(expression);
+    dbSet.Remove(entity);
   }
 
-  public virtual async Task<T?> TryFindAsync(Expression<Func<T, bool>> expression)
+  public virtual void RemoveRange(IEnumerable<T> entity)
   {
-    return await _dbContext.Set<T>().FindAsync(expression);
+    dbSet.RemoveRange(entity);
+  }
+  protected virtual T Filtering(IQueryable<T> query, Expression<Func<T, bool>> filter, string? includeProperties)
+  {
+
+    query = query.Where(filter);
+    if (includeProperties != null)
+    {
+      foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+      {
+        query = query.Include(includeProp);
+      }
+    }
+    return query.FirstOrDefault();
   }
 
-  // CREATE
-  public virtual void Create(T entity)
-  {
-    _dbContext.Set<T>().Entry(entity).State = EntityState.Added;
-  }
-
-  // UPDATE
-  public virtual void Update(T entity)
-  {
-    _dbContext.Set<T>().Entry(entity).State = EntityState.Modified;
-  }
-
-  // DELETE
-  public virtual void Delete(T entity)
-  {
-    _dbContext.Set<T>().Entry(entity).State = EntityState.Deleted;
-  }
 }
