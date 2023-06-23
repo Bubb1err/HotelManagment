@@ -1,0 +1,16 @@
+﻿@model LoginUserVm
+
+@{
+  ViewData["Title"] = "Login Page";
+}
+
+<form method="post">
+  <div class="card card-body">
+    <input class="form-control" asp-for="Username" placeholder="Username" />
+    <input class="form-control" asp-for="Email" placeholder="Email" />
+    <input class="form-control" asp-for="Password" placeholder="Password" />
+    <input class="form-control" asp-for="ConfirmPassword" placeholder="ConfirmPassword" />
+    <hr/>
+    <button class="btn btn-success">Login</button>
+  </div>
+</form>
