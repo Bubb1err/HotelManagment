@@ -1,33 +1,36 @@
-namespace HotelManagment.Web
+using HotelManagment.Infrastructure.Data;
+using HotelManagment.Infrastructure.Extensions;
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddMvc();
+
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+builder.Services.ConfigureDbContext(builder.Configuration);
+
+builder.Services.AddUserRepository();
+builder.Services.AddUserService();
+
+var app = builder.Build();
+
+if (!app.Environment.IsDevelopment())
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
-            
-            builder.Services.AddMvc();
-            builder.Services.AddAutoMapper(typeof(Program).Assembly);
-            var app = builder.Build();
-
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            app.Run();
-        }
-    }
+  app.UseExceptionHandler("/Home/Error");
+  app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllerRoute(
+  "default",
+  "{controller=Home}/{action=Index}/{id?}");
+
+app.Run();

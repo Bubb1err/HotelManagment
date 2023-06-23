@@ -1,5 +1,5 @@
 ﻿using HotelManagment.Infrastructure.Data;
-using HotelManagment.Shared;
+using HotelManagment.Core.Interfaces;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +10,7 @@ public abstract class RepositoryBase<T> : IRepository<T>
 {
   protected readonly HotelDbContext _dbContext;
 
-  public RepositoryBase(HotelDbContext dbContext)
+  protected RepositoryBase(HotelDbContext dbContext)
   {
     _dbContext = dbContext;
   }
@@ -35,17 +35,20 @@ public abstract class RepositoryBase<T> : IRepository<T>
   public virtual void Create(T entity)
   {
     _dbContext.Set<T>().Entry(entity).State = EntityState.Added;
+    _dbContext.SaveChanges();
   }
 
   // UPDATE
   public virtual void Update(T entity)
   {
     _dbContext.Set<T>().Entry(entity).State = EntityState.Modified;
+    _dbContext.SaveChanges();
   }
 
   // DELETE
   public virtual void Delete(T entity)
   {
     _dbContext.Set<T>().Entry(entity).State = EntityState.Deleted;
+    _dbContext.SaveChanges();
   }
 }

@@ -6,7 +6,7 @@ namespace HotelManagment.Infrastructure.Data;
 
 public class HotelDbContext : IdentityDbContext
 {
-  public DbSet<User> Accounts { get; set; }
+  public DbSet<User> Accounts { get; set; } = null!;
 
   public HotelDbContext(DbContextOptions<HotelDbContext> options) : base(options) { }
 }

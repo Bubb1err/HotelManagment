@@ -1,0 +1,15 @@
+﻿@model RegisterUserVm
+
+@{
+  ViewData["Title"] = "Register";
+}
+
+<div class="card card-body">
+  <input class="form-control mb-1" asp-for="Email"/>
+  <input class="form-control mb-1" asp-for="Username"/>
+  <input class="form-control mb-1" asp-for="Password"/>
+  <input class="form-control mb-1" asp-for="ConfirmPassword"/>
+  
+  <hr/>
+  <button class="btn btn-success">Register</button>
+</div>
