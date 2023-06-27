@@ -8,7 +8,7 @@ public interface IReportsService
   Result<IEnumerable<Report>> GetAll(int page = 1, int pageSize = 10);
   Result<IEnumerable<Report>> GetAll(Expression<Func<Report, bool>> expression, int page = 1, int pageSize = 10);
   Task<Result<Report>> FindAsync(Expression<Func<Report, bool>> expression);
-  Task<Result<Report>> FindByIdAsync(Guid id);
+  Task<Result<Report>> FindByIdAsync(int id);
   
   Task<Result> CreateAsync(Report report);
   

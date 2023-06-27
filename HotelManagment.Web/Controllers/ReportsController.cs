@@ -30,7 +30,7 @@ public class ReportsController : Controller
   }
 
   [HttpGet("Report/{id:guid}")]
-  public async Task<IActionResult> GetById(Guid id)
+  public async Task<IActionResult> GetById(int id)
   {
     Result<Report> result = await _reportsService.FindByIdAsync(id);
 
@@ -57,7 +57,7 @@ public class ReportsController : Controller
     }
 
     Report report = _mapper.Map<Report>(reportVm);
-    report.CreatorId = User.Claims.Single(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
+    report.ProblemSolverId = User.Claims.Single(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
 
     Result result = await _reportsService.CreateAsync(report);
 

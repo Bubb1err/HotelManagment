@@ -13,11 +13,11 @@ else
   @foreach (Report report in Model)
   {
     <div class="card card-body">
-      <h4><a asp-action="GetById" asp-route-id="@report.Id" class="text-dark">@report.Title</a></h4>
+      <h4><a asp-action="GetById" asp-route-id="@report.Id" class="text-dark">@report.Description</a></h4>
       <hr/>
       <p>@report.Description</p>
       <hr/>
-      <p style="opacity: 50%;">@report.CreatedAt</p>
+      <p style="opacity: 50%;">@report.EmployeeAcceptedTime</p>
     </div>
   }
 }

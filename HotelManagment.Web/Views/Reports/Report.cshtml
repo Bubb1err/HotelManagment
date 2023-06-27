@@ -1,13 +1,12 @@
 ﻿@model Report
 
 @{
-  ViewData["Title"] = $"{Model.Title}";
+  //ViewData["Title"] = $"{Model.Title}";
 }
 
 <div class="card card-body">
-  <h3>@Model.Title</h3>
   <hr/>
   <p>@Model.Description</p>
   <hr/>
-  <p style="opacity: 50%;">@Model.CreatedAt</p>
+  <p style="opacity: 50%;">@Model.EmployeeAcceptedTime</p>
 </div>
