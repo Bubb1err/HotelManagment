@@ -5,39 +5,43 @@ namespace HotelManagment.Core.Entities;
 public sealed class Reservation
 {
   public int Id { get; set; }
+    private DateTime _startDate;
   public DateTime StartDate 
     { 
-        get { return StartDate; }
+        get { return _startDate; }
         set
         {
             if (value < DateTime.UtcNow) throw new ArgumentException(nameof(Reservation));
-            StartDate = value;
+            _startDate = value;
         }
      }
+    private DateTime _endDate;
   public DateTime EndDate
     {
-        get { return EndDate; }
+        get { return _endDate; }
         set
         {
             if(value <= DateTime.UtcNow) throw new ArgumentException(nameof(Reservation));
-            EndDate = value;
+            _endDate = value;
         }
-    }
+   }
+    private decimal _totalPrice;
     public decimal TotalPrice {
-        get { return TotalPrice; }
+        get { return _totalPrice; }
         set
         {
             if (value< 0) throw new ArgumentException(nameof(Reservation));
-            TotalPrice = value;
+            _totalPrice = value;
         }
     }
+    private int _peopleCount;
     public int PeopleCount
     {
-        get { return PeopleCount; }
+        get { return _peopleCount; }
         set
         {
             if (value < 1 ) throw new ArgumentException(nameof(Reservation));
-            PeopleCount = value;
+            _peopleCount = value;
         }
 
     }
