@@ -1,6 +1,4 @@
-using HotelManagment.Infrastructure.Data;
 using HotelManagment.Infrastructure.Extensions;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +27,11 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapAreaControllerRoute(
+  "Management",
+  "Management",
+  "Management/{controller=Reports}/{action=All}");
 
 app.MapControllerRoute(
   "default",

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Report>
+
+@{
+  ViewData["Title"] = "Index";
+}
+
+<div class="card card-body mt-3 mb-2" style="display: flex; flex-direction: row; align-items: center; gap: 15%;">
+  <input class="form-control f20" style="border-radius: 20px; border-color: lightgrey; width: 75%;" placeholder="Search..."/>
+  <a href="#" style="width: fit-content;">Order By</a>
+</div>
+
+<div class="card card-body">
+  @foreach (Report report in Model)
+  {
+    <a href="#" class="mb-1" style="text-decoration: none; color: black;">
+      <div class="card card-body" style="display: block;">
+        <h4 class="mb-0">Report #@report.Id</h4>
+        <span class="mb-0">Room [???]</span>
+        <hr class="mt-1 mb-1"/>
+        <p>@report.Description</p>
+        <span style="opacity: .5;">Reported at @report.CreatedAt</span>
+      </div>
+    </a>
+  }
+
+  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group" role="group" aria-label="First group">
+      <button type="button" class="btn btn-secondary">1</button>
+      <button type="button" class="btn btn-secondary">2</button>
+      <button type="button" class="btn btn-secondary">3</button>
+      <button type="button" class="btn btn-secondary">4</button>
+    </div>
+  </div>
+</div>

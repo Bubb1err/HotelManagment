@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>@ViewData["Title"] - Management</title>
+  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+  <link rel="stylesheet" href="~/css/bootstrap/bootswatch.css" asp-append-version="true"/>
+</head>
+<body>
+<div class="container-main">
+  <div class="sidebar" style="background-color: #0c4128">
+    <div class="text-center" style="height: 20vh; color: white; display: flex; align-items: center; justify-content: center; font-size: 32px;">
+      <a href="#" style="text-decoration: none;">Management</a>
+    </div>
+    <a class="sidebar-button mb-2">
+      <text>Rooms</text>
+    </a>
+    <a class="sidebar-button active mb-2">
+      <text>Reports</text>
+    </a>
+    <a class="sidebar-button mb-2">
+      <text>Reservations</text>
+    </a>
+    <a class="sidebar-button mb-2">
+      <text>Employees</text>
+    </a>
+  </div>
+  <main class="main-window" role="main">
+    @RenderBody()
+  </main>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
