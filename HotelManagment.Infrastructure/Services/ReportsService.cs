@@ -56,14 +56,13 @@ public class ReportsService : IReportsService
 
     return Result<Report>.Succeeded(report);
   }
-  public async Task<Result<Report>> FindByIdAsync(Guid id)
+  public async Task<Result<Report>> FindByIdAsync(int id)
   {
     return await FindAsync(report => report.Id == id);
   }
 
   public async Task<Result> CreateAsync(Report report)
   {
-    report.Title = report.Title.Trim();
     report.Description = report.Description.Trim();
     
     await _reportsRepository.CreateAsync(report);
@@ -80,7 +79,6 @@ public class ReportsService : IReportsService
       return Result.Failure("Report with that 'ID' not found.");
     }
     
-    updatedReport.Title = updatedReport.Title.Trim();
     updatedReport.Description = updatedReport.Description.Trim();
     
     await _reportsRepository.UpdateAsync(updatedReport);

@@ -8,11 +8,8 @@
   <div class="card card-body">
     <div class="text-danger" asp-validation-summary="ModelOnly"></div>
     
-    <input class="form-control mb-1" asp-for="Title" placeholder="Title"/>
-    <span class="text-danger" asp-validation-for="Title"></span>
-    
     <textarea class="form-control mb-1" asp-for="Description" placeholder="Description" style="min-height: 100px; max-height: 250px;"></textarea>
-    <span class="text-danger" asp-validation-for="Title"></span>
+        <span class="text-danger" asp-validation-for="Description"></span>
     <hr/>
     <button class="btn btn-dark">Create</button>
   </div>
