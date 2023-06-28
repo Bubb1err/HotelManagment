@@ -25,25 +25,22 @@
           <li class="nav-item">
             <a class="nav-link text-light" asp-controller="Home" asp-action="Index">Home</a>
           </li>
-          @if(!isAuthenticated)
+          @if (!isAuthenticated)
           {
             <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="Account" asp-action="Login">Login</a>
+              <a class="nav-link text-light" asp-controller="Account" asp-action="Login">Login</a>
             </li>
             <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="Account" asp-action="Register">Register</a>
+              <a class="nav-link text-light" asp-controller="Account" asp-action="Register">Register</a>
             </li>
           }
           else
           {
             <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="Reports" asp-action="All">All Reports</a>
+              <a class="nav-link text-light" asp-controller="Reports" asp-action="All">All Reports</a>
             </li>
             <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="Reports" asp-action="Create">Report</a>
-            </li>
-            <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="Account" asp-action="SignOutAccount">Sign Out</a>
+              <a class="nav-link text-light" asp-controller="Account" asp-action="SignOutAccount">Sign Out</a>
             </li>
           }
         </ul>

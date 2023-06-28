@@ -1,58 +1,58 @@
-﻿
-using HotelManagment.Core.Enums;
+﻿using HotelManagment.Core.Enums;
 
 namespace HotelManagment.Core.Entities;
 
 public sealed class Room
 {
   public int Id { get; set; }
-    private int _roomNumber;
+  public RoomType Type { get; set; }
+
+  private int _floor;
+  private int _peopleCapacity;
+  private decimal _pricePerNight;
+  private int _roomNumber;
+  
   public int RoomNumber
+  {
+    get => _roomNumber;
+    set
     {
-        get { return _roomNumber; }
-        set
-        {
-            if (value < 0) throw new ArithmeticException(nameof(Room));
-            _roomNumber = value;
-        }
+      if (value < 0) throw new ArithmeticException(nameof(Room));
+      _roomNumber = value;
     }
-    private int _floor;
-    public int Floor
-    {
-        get { return _floor; }
-        set
-        {
-            if (value < 0) throw new ArithmeticException(nameof(Room));
-            _floor = value;
-        }
-    }
-    private int _peopleCapacity;
-    public int PeopleCapacity
-    {
-        get { return _peopleCapacity; }
-        set
-        {
-            if (value < 0) throw new ArithmeticException(nameof(Room));
-            _peopleCapacity = value;
-        }
-    }
-    private decimal _pricePerNight;
-    public decimal PricePerNight
-    {
-        get { return _pricePerNight; }
-        set
-        {
-            if (value < 0) throw new ArithmeticException(nameof(Room));
-            _pricePerNight = value;
-        }
-    }
-    public RoomType Type { get; set; }
-    // Relations
+  }
 
-    public IReadOnlyCollection<RoomBenefit> Benefits { get; set; }
-    public Room()
+  public int Floor
+  {
+    get => _floor;
+    set
     {
-        Benefits = new List<RoomBenefit>();
+      if (value < 0) throw new ArithmeticException(nameof(Room));
+      _floor = value;
     }
+  }
 
+  public int PeopleCapacity
+  {
+    get => _peopleCapacity;
+    set
+    {
+      if (value < 0) throw new ArithmeticException(nameof(Room));
+      _peopleCapacity = value;
+    }
+  }
+
+  public decimal PricePerNight
+  {
+    get => _pricePerNight;
+    set
+    {
+      if (value < 0) throw new ArithmeticException(nameof(Room));
+      _pricePerNight = value;
+    }
+  }
+
+  
+  // Relations
+  public IReadOnlyCollection<RoomBenefit> Benefits { get; set; } = null!;
 }

@@ -1,14 +1,7 @@
-﻿namespace HotelManagment.Core.Entities
+﻿namespace HotelManagment.Core.Entities;
+public sealed class Benefit
 {
-    public sealed class Benefit
-    {
-        public int Id { get; set; }
-        public string Description { get; set; }
-        public string Icon { get; set; }
-        public Benefit()
-        {
-            Description= string.Empty;
-            Icon= string.Empty;
-        }
-    }
+  public int Id { get; set; }
+  public string Description { get; set; } = string.Empty;
+  public string Icon { get; set; } = string.Empty;
 }
