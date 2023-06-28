@@ -9,8 +9,8 @@
  * Copyright 2011-2023 The Bootstrap Authors
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap);
-
+/*@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap);*/
+@import url('https://fonts.googleapis.com/css2?family=Bigshot+One&display=swap');
 :root, [data-bs-theme=light] {
     --bs-blue: #325d88;
     --bs-indigo: #6610f2;
@@ -4205,14 +4205,14 @@ textarea.form-control-lg {
 
 .navbar {
     --bs-navbar-padding-x: 0;
-    --bs-navbar-padding-y: 0.5rem;
+    --bs-navbar-padding-y: 1rem;
     --bs-navbar-color: rgba(var(--bs-emphasis-color-rgb), 0.65);
     --bs-navbar-hover-color: #000;
     --bs-navbar-disabled-color: rgba(var(--bs-emphasis-color-rgb), 0.3);
     --bs-navbar-active-color: #000;
     --bs-navbar-brand-padding-y: 0.3125rem;
     --bs-navbar-brand-margin-end: 1rem;
-    --bs-navbar-brand-font-size: 1.25rem;
+    --bs-navbar-brand-font-size: 2rem;
     --bs-navbar-brand-color: #000;
     --bs-navbar-brand-hover-color: #000;
     --bs-navbar-nav-link-padding-x: 0.5rem;
@@ -13481,8 +13481,8 @@ textarea.form-control-lg {
 }
 
 .breadcrumb, .btn, .dropdown-menu .dropdown-item, .nav-pills .nav-link, .nav-tabs .nav-link, .navbar .nav-link, .pagination, .sandstone, .tooltip {
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 400;
     line-height: 22px;
     text-transform: uppercase
 }
