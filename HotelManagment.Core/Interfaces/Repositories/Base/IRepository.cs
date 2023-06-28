@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace HotelManagment.Core.Interfaces;
+namespace HotelManagment.Core.Interfaces.Repositories.Base;
 
 public interface IRepository<T>
   where T : class

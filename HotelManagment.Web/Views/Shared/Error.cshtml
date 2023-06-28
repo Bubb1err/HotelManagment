@@ -1,0 +1,14 @@
+﻿@model List<string>
+
+@{
+  ViewData["Title"] = "Error ;(";
+}
+
+<div class="card card-body">
+  <h4>Sorry, something goes wrong ;(</h4>
+  <hr/>
+  @foreach (string error in Model)
+  {
+    <p>@error</p>
+  }
+</div>

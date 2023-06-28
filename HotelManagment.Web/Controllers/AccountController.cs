@@ -2,9 +2,9 @@
 using HotelManagment.Web.ViewModels;
 using HotelManagment.Core.Entities;
 using HotelManagment.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace HotelManagment.Web.Controllers;
@@ -70,11 +70,11 @@ public class AccountController : Controller
     }
 
     IdentityUser identityUser = _mapper.Map<IdentityUser>(userVm);
-    IdentityResult result = await _userManager.CreateAsync(identityUser, userVm.Password);
+    IdentityResult identityResult = await _userManager.CreateAsync(identityUser, userVm.Password);
 
-    if (!result.Succeeded)
+    if (!identityResult.Succeeded)
     {
-      foreach (IdentityError error in result.Errors)
+      foreach (IdentityError error in identityResult.Errors)
       {
         ModelState.AddModelError("", error.Description);
       }
@@ -82,13 +82,20 @@ public class AccountController : Controller
       return View(userVm);
     }
 
-    User user = _mapper.Map<User>(userVm);
-
-    _userService.Create(user);
+    User user = _mapper.Map<User>(identityUser);
+    Result result = await _userService.CreateAsync(user);
     
     await _signInManager.SignInAsync(identityUser, true);
 
     return RedirectToAction(ACTION_MAIN_PAGE, CONTROLLER_MAIN_PAGE);
+  }
+
+  [Authorize]
+  public async Task<IActionResult> SignOutAccount()
+  {
+    await _signInManager.SignOutAsync();
+
+    return Redirect(Request.Headers["Referer"]!);
   }
 
   private void AddErrorsToModelState(bool isLocked, bool isNotAllowed)

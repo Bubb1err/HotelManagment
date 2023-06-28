@@ -1,10 +1,10 @@
 ﻿using HotelManagment.Core.Entities;
-using HotelManagment.Core.Interfaces;
+using HotelManagment.Core.Interfaces.Repositories;
 using HotelManagment.Infrastructure.Data;
 
 namespace HotelManagment.Infrastructure.Repositories;
 
-public class UserRepository : RepositoryBase<User>, IUserRepository
+internal class UserRepository : RepositoryBase<User>, IUserRepository
 {
   public UserRepository(HotelDbContext dbContext) : base(dbContext) { }
 }

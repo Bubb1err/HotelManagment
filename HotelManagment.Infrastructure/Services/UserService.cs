@@ -1,5 +1,6 @@
 ﻿using HotelManagment.Core.Entities;
 using HotelManagment.Core.Interfaces;
+using HotelManagment.Core.Interfaces.Repositories;
 
 namespace HotelManagment.Infrastructure.Services;
 
@@ -48,23 +49,23 @@ public class UserService : IUserService
     return Result<User>.Succeeded(user);
   }
 
-  public Result Create(User user)
+  public async Task<Result> CreateAsync(User user)
   {
-    _userRepository.CreateAsync(user);
+    await _userRepository.CreateAsync(user);
 
     return Result.Succeeded();
   }
 
-  public Result Update(User user)
+  public async Task<Result> UpdateAsync(User user)
   {
-    _userRepository.UpdateAsync(user);
+    await _userRepository.UpdateAsync(user);
     
     return Result.Succeeded();
   }
 
-  public Result Delete(User user)
+  public async Task<Result> DeleteAsync(User user)
   {
-    _userRepository.DeleteAsync(user);
+    await _userRepository.DeleteAsync(user);
 
     return Result.Succeeded();
   }

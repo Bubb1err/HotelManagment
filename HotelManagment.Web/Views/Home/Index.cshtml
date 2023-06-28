@@ -1,8 +1,125 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HotelManagment</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/bootstrap/bootswatch.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark box-shadow mb-3" style="position:fixed;z-index:1;width:100%;opacity:60%;">
+            <div class="container-fluid">
+                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">Hotel</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @{
+                            bool isAuthenticated = User.Identity?.IsAuthenticated ?? false;
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        @if (!isAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Management" asp-controller="Reports" asp-action="All">All Reports</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="Account" asp-action="SignOutAccount">Sign Out</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="">
+        <main role="main" class="">
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active" onclick="RedirectToSpa()">
+                        <img src="~/images/home/spa.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item" onclick="RedirectToRestaurant()">
+                        <img src="~/images/home/rest.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item" onclick="RedirectToRooms()">
+                        <img src="~/images/home/room.jpg" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </main>
+    </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <footer class="footer bg-dark text-light" style="height:20rem;">
+        <div class="container pt-5">
+            <div>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-controller="Account" asp-action="Login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-controller="Account" asp-action="Register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-controller="#" asp-action="#">Another useful link</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        function RedirectToSpa() {
+            window.location.href = "https://google.com";//todo:replace 
+        }
+        function RedirectToRestaurant() {
+            window.location.href = "https://google.com";//todo:replace
+        }
+        function RedirectToRooms() {
+            window.location.href = "https://google.com";//todo:replace
+        }
+    </script>
+</body>
+</html>
+
+

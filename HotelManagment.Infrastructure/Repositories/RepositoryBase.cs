@@ -1,5 +1,5 @@
 ﻿using HotelManagment.Infrastructure.Data;
-using HotelManagment.Core.Interfaces;
+using HotelManagment.Core.Interfaces.Repositories.Base;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,7 +28,7 @@ public abstract class RepositoryBase<T> : IRepository<T>
 
   public virtual async Task<T?> TryFindAsync(Expression<Func<T, bool>> expression)
   {
-    return await _dbContext.Set<T>().FindAsync(expression);
+    return await _dbContext.Set<T>().FirstAsync(expression);
   }
 
   // CREATE

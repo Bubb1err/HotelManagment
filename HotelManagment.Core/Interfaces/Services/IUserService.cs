@@ -8,7 +8,7 @@ public interface IUserService
   Task<Result<User>> FindByUsernameAsync(string username);
   Task<Result<User>> FindByEmailAsync(string email);
 
-  Result Create(User user);
-  Result Update(User user);
-  Result Delete(User user);
+  Task<Result> CreateAsync(User user);
+  Task<Result> UpdateAsync(User user);
+  Task<Result> DeleteAsync(User user);
 }
