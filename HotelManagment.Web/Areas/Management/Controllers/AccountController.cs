@@ -7,12 +7,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
-namespace HotelManagment.Web.Controllers;
+namespace HotelManagment.Web.Areas.Management.Controllers;
 
+[Area("Management")]
 public class AccountController : Controller
 {
-  private const string ACTION_MAIN_PAGE = "Index";
-  private const string CONTROLLER_MAIN_PAGE = "Home";
+  private const string ACTION_MAIN_PAGE = "All";
+  private const string CONTROLLER_MAIN_PAGE = "Reports";
 
   private readonly IMapper _mapper;
   private readonly IUserService _userService;
@@ -91,6 +92,7 @@ public class AccountController : Controller
   }
 
   [Authorize]
+  [ActionName("SignOut")]
   public async Task<IActionResult> SignOutAccount()
   {
     await _signInManager.SignOutAsync();

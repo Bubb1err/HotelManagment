@@ -13,6 +13,13 @@ public class ReportsService : IReportsService
   {
     _reportsRepository = reportsRepository;
   }
+
+  public int GetPageCount(int pageSize = 10)
+  {
+    int reportsCount = _reportsRepository.Get().Count();
+    
+    return (int)Math.Ceiling(1f * reportsCount / pageSize);
+  }
   
   public Result<IEnumerable<Report>> GetAll(int page = 1, int pageSize = 10)
   {

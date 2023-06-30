@@ -4,6 +4,8 @@ namespace HotelManagment.Core.Interfaces;
 
 public interface IUserService
 {
+  Result<IEnumerable<User>> GetAll();
+  
   Task<Result<User>> FindByIdAsync(string id);
   Task<Result<User>> FindByUsernameAsync(string username);
   Task<Result<User>> FindByEmailAsync(string email);

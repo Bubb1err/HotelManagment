@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Report>
+﻿@model ReportsVm
 
 @{
-  ViewData["Title"] = "Index";
+  ViewData["Title"] = $"[{Model.CurrentPage}] Reports";
 }
 
 <div class="card card-body mt-3 mb-2" style="display: flex; flex-direction: row; align-items: center; gap: 15%;">
@@ -10,25 +10,26 @@
 </div>
 
 <div class="card card-body">
-  @foreach (Report report in Model)
+  @foreach (Report report in Model.Reports)
   {
-    <a href="#" class="mb-1" style="text-decoration: none; color: black;">
+    <a class="mb-1" asp-action="GetById" asp-route-reportId="@report.Id" style="text-decoration: none; color: black;">
       <div class="card card-body" style="display: block;">
         <h4 class="mb-0">Report #@report.Id</h4>
-        <span class="mb-0">Room [???]</span>
+        <span class="mb-0">Room [@report.Room.RoomNumber]</span>
+        <span class="mb-0" style="opacity: .6 ;">Assigned: none</span>
         <hr class="mt-1 mb-1"/>
         <p>@report.Description</p>
-        <span style="opacity: .5;">Reported at @report.ReportedAt.ToLongDateString()</span>
+        <span style="opacity: .5;">Reported at @report.ReportedAt.ToShortDateString() @report.ReportedAt.ToShortTimeString()</span>
       </div>
     </a>
   }
 
   <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
     <div class="btn-group" role="group" aria-label="First group">
-      <button type="button" class="btn btn-secondary">1</button>
-      <button type="button" class="btn btn-secondary">2</button>
-      <button type="button" class="btn btn-secondary">3</button>
-      <button type="button" class="btn btn-secondary">4</button>
+      @for (int currentPage = Model.LowBorder; currentPage < Model.TopBorder; currentPage++)
+      {
+        <button type="button" class="btn btn-secondary">@currentPage</button>
+      }
     </div>
   </div>
 </div>

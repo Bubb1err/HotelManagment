@@ -5,6 +5,7 @@ namespace HotelManagment.Core.Interfaces.Services;
 
 public interface IReportsService
 {
+  int GetPageCount(int pageSize = 10);
   Result<IEnumerable<Report>> GetAll(int page = 1, int pageSize = 10);
   Result<IEnumerable<Report>> GetAll(Expression<Func<Report, bool>> expression, int page = 1, int pageSize = 10);
   Task<Result<Report>> FindAsync(Expression<Func<Report, bool>> expression);

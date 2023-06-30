@@ -2,6 +2,7 @@
 using HotelManagment.Core.Interfaces.Repositories.Base;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace HotelManagment.Infrastructure.Repositories;
 
@@ -9,7 +10,6 @@ public abstract class RepositoryBase<T> : IRepository<T>
   where T : class
 {
   protected readonly HotelDbContext _dbContext;
-
   protected RepositoryBase(HotelDbContext dbContext)
   {
     _dbContext = dbContext;
@@ -18,17 +18,21 @@ public abstract class RepositoryBase<T> : IRepository<T>
   // GET
   public virtual IQueryable<T> Get()
   {
-    return _dbContext.Set<T>().AsNoTracking();
+    IQueryable<T> items = ApplyIncludes(_dbContext.Set<T>());
+
+    return items.AsNoTracking();
   }
 
   public virtual IQueryable<T> Get(Expression<Func<T, bool>> expression)
   {
-    return _dbContext.Set<T>().Where(expression).AsNoTracking();
+    IQueryable<T> items = ApplyIncludes(_dbContext.Set<T>().Where(expression));
+    
+    return items.AsNoTracking();
   }
 
   public virtual async Task<T?> TryFindAsync(Expression<Func<T, bool>> expression)
   {
-    return await _dbContext.Set<T>().FirstAsync(expression);
+    return await ApplyIncludes(_dbContext.Set<T>()).FirstAsync(expression);
   }
 
   // CREATE
@@ -50,5 +54,15 @@ public abstract class RepositoryBase<T> : IRepository<T>
   {
     _dbContext.Set<T>().Remove(entity);
     await _dbContext.SaveChangesAsync();
+  }
+
+  private IQueryable<T> ApplyIncludes(IQueryable<T> items)
+  {
+    foreach (INavigation navigation in _dbContext.Model.FindEntityType(typeof(T))!.GetNavigations())
+    {
+      items = items.Include(navigation.Name);
+    }
+
+    return items;
   }
 }

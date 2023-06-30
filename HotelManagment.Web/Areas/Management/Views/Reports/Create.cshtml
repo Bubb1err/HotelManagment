@@ -1,0 +1,15 @@
+﻿@model CreateReportVm
+
+@{
+  ViewData["Title"] = "Create report";
+}
+
+<form method="post">
+  <div class="card card-body">
+    <textarea class="form-control" asp-for="Description" placeholder="Description"></textarea>
+    <input class="form-control" asp-for="RoomId" placeholder="Room Id"/>
+    <select class="form-control" asp-items="@Html.GetEnumSelectList(typeof(ProblemType))"></select>
+    <hr/>
+    <button class="btn btn-success">Create</button>
+  </div>
+</form>

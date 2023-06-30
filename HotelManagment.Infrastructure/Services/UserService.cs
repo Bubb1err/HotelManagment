@@ -12,7 +12,14 @@ public class UserService : IUserService
   {
     _userRepository = userRepository;
   }
-  
+
+  public Result<IEnumerable<User>> GetAll()
+  {
+    IQueryable<User> users = _userRepository.Get();
+
+    return Result<IEnumerable<User>>.Succeeded(users);
+  }
+
   public async Task<Result<User>> FindByIdAsync(string id)
   {
     User? user = await _userRepository.TryFindAsync(user => user.Id == id);

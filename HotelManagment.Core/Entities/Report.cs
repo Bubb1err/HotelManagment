@@ -15,8 +15,8 @@ public sealed class Report
   
   //Relations
   [ForeignKey(nameof(User))] 
-  public string ProblemSolverId { get; set; } = string.Empty;
-  public User User { get; set; } = null!;
+  public string? ProblemSolverId { get; set; }
+  public User? User { get; set; }
   
   [ForeignKey(nameof(Room))]
   public int RoomId { get; set; }

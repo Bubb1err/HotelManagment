@@ -1,0 +1,52 @@
+﻿@model Report
+
+@{
+  ViewData["Title"] = "Report #" + Model.Id;
+}
+
+<div style="display: flex; flex-direction: column; gap: 10px;">
+  <div class="card card-body">
+    <h3>Report #@Model.Id</h3>
+    <span>Room [@Model.Room.RoomNumber]</span>
+    <hr/>
+    <p>@Model.Description</p>
+    <span style="opacity: .5;">@Model.ReportedAt.ToLongDateString()</span>
+  </div>
+
+  <div class="card card-body">
+    @if (Model.ProblemSolverId is null)
+    {
+      <h4>No one assigned</h4>
+      <hr/>
+      <input class="form-control mb-2" id="search-employee-field" placeholder="Search"/>
+      <div class="card card-body" id="employees-container" style="display: flex;">
+        <span class="card card-body" id="employee-template" style="display: flex; flex-direction: row; align-items: center; gap: 15px;">
+          <h5 id="username-field" style="width: fit-content; margin-bottom: 0;">Username</h5>
+          <a class="btn btn-outline-primary" id="assign-button" style="width: fit-content; font-size: 18px;"><i class="bi bi-plus-circle"></i> Assign</a>
+        </span>
+      </div>
+    }
+    else
+    {
+      <h4>Assigned</h4>
+      <hr/>
+      <p></p>
+    }
+  </div>
+
+  <div class="card card-body" style="display: flex; flex-direction: row-reverse; gap: 5px;">
+    <a class="btn btn-danger" style="width: fit-content; font-size: 16px;">
+      <i class="bi bi-trash"></i>
+      <text>Delete</text>
+    </a>
+    <a class="btn btn-primary" style="width: fit-content; font-size: 16px;">
+      <i class="bi bi-check-lg"></i>
+      <text>Mark as done</text>
+    </a>
+  </div>
+</div>
+
+<script src="~/js/ProblemPage.js"></script>
+<script>
+  setReportId(@Model.Id);
+</script>

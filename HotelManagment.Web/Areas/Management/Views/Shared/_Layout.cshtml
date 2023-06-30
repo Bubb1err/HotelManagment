@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
   <link rel="stylesheet" href="~/css/bootstrap/bootswatch.css" asp-append-version="true"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
 <div class="container-main">
@@ -14,20 +15,47 @@
     <div class="text-center" style="height: 20vh; color: white; display: flex; align-items: center; justify-content: center; font-size: 32px;">
       <a href="#" style="text-decoration: none;">Management</a>
     </div>
-    <a class="sidebar-button mb-2">
-      <text>Rooms</text>
-    </a>
-    <a class="sidebar-button active mb-2">
-      <text>Reports</text>
-    </a>
-    <a class="sidebar-button mb-2">
-      <text>Reservations</text>
-    </a>
-    <a class="sidebar-button mb-2">
-      <text>Employees</text>
-    </a>
+    @{
+      bool isAuthenticated = User.Identity?.IsAuthenticated ?? false;
+    }
+    @if (isAuthenticated)
+    {
+      string controllerName = (Context.Request.RouteValues["controller"] as string)!;
+      
+      string roomsActive = String.Equals(controllerName, "Rooms", StringComparison.CurrentCultureIgnoreCase) ? "active" : "";
+      string reportsActive = String.Equals(controllerName, "Reports", StringComparison.CurrentCultureIgnoreCase) ? "active" : "";
+      string reservationsActive = String.Equals(controllerName, "Reservations", StringComparison.CurrentCultureIgnoreCase) ? "active" : "";
+      string employeesActive = String.Equals(controllerName, "Employees", StringComparison.CurrentCultureIgnoreCase) ? "active" : "";
+      
+      <a class="sidebar-button @roomsActive mb-2">
+        <text>Rooms</text>
+      </a>
+      <a class="sidebar-button @reportsActive mb-2" asp-action="All">
+        <text>Reports</text>
+      </a>
+      <a class="sidebar-button @reservationsActive mb-2">
+        <text>Reservations</text>
+      </a>
+      <a class="sidebar-button @employeesActive mb-2">
+        <text>Employees</text>
+      </a>
+      <span style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+        <a href="#"><i class="bi bi-person-circle" style="color: white; font-size: 28px;"></i></a>
+        <a asp-area="Management" asp-controller="Account" asp-action="SignOut"><i class="bi bi-door-open" style="color: red; font-size: 28px;"></i></a>
+      </span>
+    }
+    else
+    {
+      <a class="sidebar-button mb-2" asp-area="Management" asp-controller="Account" asp-action="Login">
+        <text>Login</text>
+      </a>
+      <a class="sidebar-button mb-2" asp-area="Management" asp-controller="Account" asp-action="Register">
+        <text>Register</text>
+      </a>
+    }
+    
   </div>
-  <main class="main-window" role="main">
+  <main class="main-window" role="main" style="padding: 25px;">
     @RenderBody()
   </main>
 </div>

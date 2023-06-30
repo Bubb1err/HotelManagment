@@ -8,6 +8,7 @@ public abstract class ResultBase
   internal ResultBase(IEnumerable<string> errors)
   {
     IsSucceeded = false;
+    Errors = errors.ToList();
   }
   
   internal ResultBase() { }
